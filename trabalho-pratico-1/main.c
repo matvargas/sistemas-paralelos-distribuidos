@@ -1,4 +1,45 @@
 #include "tree.h"
+#include "pthread.h"
+#include <stdio.h>
+
+#define MAXTHREADS 100
+
+// Struct para armzenar os dados da thread
+typedef struct ThreadInfo {
+    pthread_t thread;
+    int threadID;
+} ThreadInfo;
+
+ThreadInfo threads[MAXTHREADS]; //Array de threads
+pthread_mutex_t TreeLock; //Mutex para bloquear a sessão crítica
+int threadCount = 0;
+
+enum operationTypes {INSERT = 1, REMOVE, SEARCH} operationTypes;
+
+/**
+ * Função resposavel por triagem do tipo de operação que será feita na árvore.
+ * Também utilizada para padronizar com a inicialização de threads
+**/
+void *threeOperation (void* operationType, void* value){
+    switch (operationTypes){
+    case INSERT:
+        //TODO: Alterar a função para receber o valor de ID da thread
+        // Insere(x, &Dicionario);
+        break;
+    case REMOVE:
+        //TODO: Alterar a função para receber o valor de ID da thread
+        // Retira(x, &Dicionario);
+        break;
+    case SEARCH:
+        //TODO: Alterar a função para receber o valor de ID da thread
+        // Pesquisa(x, &Dicionario);
+        break;
+    default:
+        pritnf("Operação não reconhecida: %d \n", (int)value);
+        exit(EXIT_FAILURE);
+        break;
+    }
+}
 
 int main(int argc, char *argv[])
 {
